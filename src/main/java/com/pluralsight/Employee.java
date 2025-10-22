@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Employee {
@@ -7,10 +8,10 @@ public class Employee {
     private String name, department;
     private double payRate, hoursWorked;
     private Double starttime, endtime;
-    private boolean punchedIn;
 
 
-    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked, double starttome, double endtime, boolean punchedIn) {
+
+    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked, double starttome, double endtime) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
@@ -18,7 +19,7 @@ public class Employee {
         this.hoursWorked = hoursWorked;
         this.starttime = starttome;
         this.endtime = endtime;
-        this.punchedIn = punchedIn;
+
     }
 
     public double getTotalPay() {
@@ -47,40 +48,41 @@ public class Employee {
         }
     }
 
-    public void punchedIn(double time){
+    public void punchedIn(double time) {
         this.starttime = time;
-        System.out.println(name + "Clocked-In At" + time);
-
-    }
-
-    public void punchedOut(double time){
-        this.endtime = time;
-        System.out.println(name + "Clocked-Out At" + time);
 
     }
 
 
-    public void punchtimecard(double time){
-        if (punchedIn )
-            starttime = time;
-        punchedIn = false;
-        System.out.println(name + " Punched - In At" + time);
-    }else {
-
+    public void punchOut(double time){
+        this.hoursWorked += (time - this.starttime);
+        this.starttime = (double) 0;
     }
 
 
+    public void punchTimeCard(double time) {
 
+        if (this.starttime > 0) { //punch out
+            this.hoursWorked += (time - this.starttime);
+            this.starttime = (double) 0;
+        } else {
+            this.starttime = time;
+        }
+    }
 
+    public void punchIn(){
+        LocalTime now = LocalTime.now();
+        double converttime = now.getHour() + (now.getMinute()/ 60.0);
+        this.starttime = converttime;
 
+    }
 
-
-
-
-
-
-
-
-
+    public void punchOut (){
+        LocalTime now = LocalTime.now();
+        double converttime = now.getHour() + (now.getMinute()/ 60.0); // time we converted
+        double workedhours = converttime - this.starttime;
+        this.hoursWorked += workedhours;
+        this.starttime = 0.0;   // set it back to 0 after punching out
+    }
 
 }
