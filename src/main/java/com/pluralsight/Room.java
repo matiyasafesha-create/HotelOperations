@@ -6,7 +6,7 @@ public class Room {
     private boolean occupied;
     private boolean dirty;
 
-    public Room (int numberofbeds, double price, boolean occupied, boolean dirty, boolean available ){
+    public Room (int numberofbeds, double price){
         this.numberofbeds = numberofbeds;
         this.price = price;
         this.occupied = occupied;

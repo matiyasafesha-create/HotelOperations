@@ -11,13 +11,13 @@ public class Employee {
 
 
 
-    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked, double starttome, double endtime) {
+    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked, double starttime, double endtime) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
-        this.starttime = starttome;
+        this.starttime = starttime;
         this.endtime = endtime;
 
     }
